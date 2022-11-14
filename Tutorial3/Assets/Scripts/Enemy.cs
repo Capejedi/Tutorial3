@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -16,8 +18,9 @@ public class Enemy : MonoBehaviour
 	bool repaired = false;
 	Animator animator;
 	AudioSource audioSource;
-	
-	void Start ()
+    private RubyController rubyController;
+
+    void Start ()
 	{
 		rigidbody2d = GetComponent<Rigidbody2D>();
 		remainingTimeToChange = timeToChange;
@@ -76,6 +79,11 @@ public class Enemy : MonoBehaviour
 		
 		audioSource.Stop();
 		audioSource.PlayOneShot(hitSound);
-		audioSource.PlayOneShot(fixedSound);
+        audioSource.PlayOneShot(fixedSound);
+
+        if (rubyController != null)
+		{
+			rubyController.fixedRobots(1);
+		}
 	}
 }

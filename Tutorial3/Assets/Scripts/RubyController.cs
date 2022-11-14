@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class RubyController : MonoBehaviour
 {
@@ -23,6 +27,9 @@ public class RubyController : MonoBehaviour
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
     AudioSource audioSource;
+    public TextMeshProUGUI score;
+    public GameObject WinText;
+    private int scoreFixed = 0;
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -30,6 +37,8 @@ public class RubyController : MonoBehaviour
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        WinText.SetActive(false);
+        score.text = "Fixed Robots: " + scoreFixed.ToString();
     }
 
     void Update()
@@ -43,7 +52,7 @@ public class RubyController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector2 move = new Vector2(horizontal, vertical);
-        if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
+        if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
             lookDirection.Set(move.x, move.y);
             lookDirection.Normalize();
@@ -55,7 +64,7 @@ public class RubyController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
             LaunchProjectile();
-        
+
         if (Input.GetKeyDown(KeyCode.X))
         {
             RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.5f, 1 << LayerMask.NameToLayer("NPC"));
@@ -65,64 +74,75 @@ public class RubyController : MonoBehaviour
                 if (character != null)
                 {
                     character.DisplayDialog();
-                }  
+                }
             }
         }
- 
+
+        if (scoreFixed == 1)
+        {
+            WinText.SetActive(true);
+        }
+
     }
 
     void FixedUpdate()
     {
         Vector2 position = rigidbody2d.position;
-        
+
         position = position + currentInput * speed * Time.deltaTime;
-        
+
         rigidbody2d.MovePosition(position);
     }
 
     public void ChangeHealth(int amount)
     {
         if (amount < 0)
-        { 
+        {
             if (isInvincible)
                 return;
-            
+
             isInvincible = true;
             invincibleTimer = timeInvincible;
-            
+
             animator.SetTrigger("Hit");
             audioSource.PlayOneShot(hitSound);
 
             Instantiate(hitParticle, transform.position + Vector3.up * 0.5f, Quaternion.identity);
         }
-        
+
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        
-        if(currentHealth == 0)
+
+        if (currentHealth == 0)
             Respawn();
-        
+
         UIHealthBar.Instance.SetValue(currentHealth / (float)maxHealth);
     }
-    
+
     void Respawn()
     {
         ChangeHealth(maxHealth);
         transform.position = respawnPosition.position;
     }
-    
+
     void LaunchProjectile()
     {
         GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
 
         Projectile projectile = projectileObject.GetComponent<Projectile>();
         projectile.Launch(lookDirection, 300);
-        
+
         animator.SetTrigger("Launch");
         audioSource.PlayOneShot(shootingSound);
     }
-    
+
     public void PlaySound(AudioClip clip)
     {
         audioSource.PlayOneShot(clip);
+    }
+
+    public void fixedRobots(int amount)
+    {
+        scoreFixed += amount;
+        score.text = "Fixed Robots: " + scoreFixed.ToString();
     }
 }
