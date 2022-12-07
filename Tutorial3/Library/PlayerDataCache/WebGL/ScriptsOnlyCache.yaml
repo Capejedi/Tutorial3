@@ -1,12 +1,15 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Boss
     - DamageZone
     - Enemy
+    - HardEnemy
     - HealthCollectible
     - NonPlayerCharacter
     - Projectile
     - RubyController
+    - SuperHealth
     - UIHealthBar
     Cinemachine.dll:
     - Cinemachine.CinemachineBrain
@@ -18,18 +21,15 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
-    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.Tilemap.Editor.dll:
-    - UnityEditor.Tilemaps.GridBrush
     - UnityEditor.Tilemaps.GridPaintingState
-    - UnityEditor.Tilemaps.GridPaletteBrushes
-    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.SceneViewOpenTilePaletteHelper
     - UnityEditor.Tilemaps.TileDragAndDropManager
     - UnityEditor.Tilemaps.TilemapPrefabStageHelper
     Unity.Play.Publisher.Editor.dll:
     - Unity.Play.Publisher.Editor.AnalyticsHelper
+    - Unity.Play.Publisher.Editor.PublisherWindow
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -38,6 +38,12 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -49,6 +55,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.Mask
+    - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/Scene.unity:
     - Class: 1
@@ -92,54 +99,64 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 644}
+      Script: {instanceID: 646}
     - Class: 114
-      Script: {instanceID: 1534}
+      Script: {instanceID: 1536}
     - Class: 114
-      Script: {instanceID: 1876}
+      Script: {instanceID: 1726}
     - Class: 114
-      Script: {instanceID: 2078}
+      Script: {instanceID: 1882}
     - Class: 114
-      Script: {instanceID: 2296}
+      Script: {instanceID: 2090}
     - Class: 114
-      Script: {instanceID: 2688}
+      Script: {instanceID: 2258}
     - Class: 114
-      Script: {instanceID: 2706}
+      Script: {instanceID: 2312}
     - Class: 114
-      Script: {instanceID: 2756}
+      Script: {instanceID: 2324}
     - Class: 114
-      Script: {instanceID: 2774}
+      Script: {instanceID: 2708}
     - Class: 114
-      Script: {instanceID: 2844}
+      Script: {instanceID: 2726}
     - Class: 114
-      Script: {instanceID: 2940}
+      Script: {instanceID: 2776}
     - Class: 114
-      Script: {instanceID: 2990}
+      Script: {instanceID: 2794}
     - Class: 114
-      Script: {instanceID: 3000}
+      Script: {instanceID: 2866}
     - Class: 114
-      Script: {instanceID: 3032}
+      Script: {instanceID: 2964}
     - Class: 114
-      Script: {instanceID: 3176}
+      Script: {instanceID: 3016}
     - Class: 114
-      Script: {instanceID: 3304}
+      Script: {instanceID: 3026}
     - Class: 114
-      Script: {instanceID: 3432}
+      Script: {instanceID: 3060}
     - Class: 114
-      Script: {instanceID: 3996}
+      Script: {instanceID: 3204}
     - Class: 114
-      Script: {instanceID: 4124}
+      Script: {instanceID: 3332}
     - Class: 114
-      Script: {instanceID: 4412}
+      Script: {instanceID: 3464}
     - Class: 114
-      Script: {instanceID: 4654}
+      Script: {instanceID: 3508}
     - Class: 114
-      Script: {instanceID: 5014}
+      Script: {instanceID: 4036}
     - Class: 114
-      Script: {instanceID: 5412}
+      Script: {instanceID: 4166}
     - Class: 114
-      Script: {instanceID: 5430}
+      Script: {instanceID: 4458}
+    - Class: 114
+      Script: {instanceID: 4704}
+    - Class: 114
+      Script: {instanceID: 5070}
+    - Class: 114
+      Script: {instanceID: 5474}
+    - Class: 114
+      Script: {instanceID: 5492}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -238,6 +255,12 @@ ScriptsOnlyBuild:
     className: LayoutElement
   - hash:
       serializedVersion: 2
+      Hash: 66902ed9a240e3c0c71bdbacd13fe3b5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SuperHealth
+  - hash:
+      serializedVersion: 2
       Hash: 6bc76e17f0d5e93f3eea7f5a2fe227f3
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -314,6 +337,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: GroupTrack
+  - hash:
+      serializedVersion: 2
+      Hash: d92e88ca99b57e7f64e5df58d6194e2f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: HardEnemy
   - hash:
       serializedVersion: 2
       Hash: 800c50acba124432abb4cf0d47202e06
@@ -442,7 +471,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: c1c4a6c925810553a210d1f841424fb1
+      Hash: 55f813dd08286495562dfb7a8e17d46d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RubyController
@@ -548,6 +577,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: MarkerTrack
+  - hash:
+      serializedVersion: 2
+      Hash: d92e88ca99b57e7f64e5df58d6194e2f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Boss
   - hash:
       serializedVersion: 2
       Hash: 23066ceca838af0cf02e00e3cf5155c1
@@ -730,7 +765,7 @@ ScriptsOnlyBuild:
     className: CinemachineShot
   - hash:
       serializedVersion: 2
-      Hash: 3520d9b963d9c53fa50efe61cf8f7ffe
+      Hash: d9c84e091e70c013952cb40502870097
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: NonPlayerCharacter
@@ -916,7 +951,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMeshUI
   - hash:
       serializedVersion: 2
-      Hash: e8565efb283f358a6685935463171ae7
+      Hash: 66902ed9a240e3c0c71bdbacd13fe3b5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: HealthCollectible
@@ -1019,4 +1054,4 @@ ScriptsOnlyBuild:
   platform: 20
   scenePathNames:
   - Assets/Scenes/Scene.unity
-  playerPath: C:/Users/logan/OneDrive/Documents/unity/Builds/Tut3
+  playerPath: C:/Users/logan/OneDrive/Documents/unity/Builds/challenge3/Build
